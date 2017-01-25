@@ -1,0 +1,33 @@
+{
+  "name": "pipage",
+  "version": "1.0.0",
+  "description": "Splice-able stream pipeline between source & destination",
+  "license": "MIT",
+  "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
+  "keywords": [
+    "stream",
+    "splice",
+    "pipeline",
+    "pipe"
+  ],
+  "main": "lib/pipeline.js",
+  "dependencies": {
+    "bloodline": "~1.0.0"
+  },
+  "devDependencies": {
+    "mocha": "~3.2.0"
+  },
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "homepage": "https://github.com/resin-io-modules/pipage",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resin-io-modules/pipage.git"
+  },
+  "bugs": {
+    "url": "https://github.com/resin-io-modules/pipage/issues"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}

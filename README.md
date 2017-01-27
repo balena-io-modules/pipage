@@ -6,7 +6,7 @@
 
 **pip•age**
 
-- _n._  plumbing, a system of pipes  
+- _n._  plumbing, a system of pipes
 - _n._  node module, a splice-able stream pipeline
 
 ## Install via [npm](https://npmjs.com)
@@ -22,5 +22,20 @@ var Pipeline = require( 'pipage' )
 ```
 
 ```js
-var pipeline = new Pipeline()
+var checksum = new ChecksumStream( metadata )
+var slice = new SliceStream( metadata )
+
+var pipeline = new Pipeline([ slice, checksum ])
+
+if( bmap ) {
+  pipeline.splice( pipeline.indexOf( checksum ), 1 )
+  pipeline.append( new BlockMap.FilterStream( bmap ) )
+}
+
+new BlockReadStream( '/path/to/resin-os.img' )
+  .pipe( pipeline )
+  .pipe( new BlockWriteStream( '/dev/rdisk2' ) )
+  .once( 'finish', function() {
+    // happy face
+  })
 ```

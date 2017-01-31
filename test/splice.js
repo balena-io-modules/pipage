@@ -39,15 +39,20 @@ describe( 'Pipeline.splice()', function() {
         done()
       })
 
-    pipeline.splice( 0, 0, transf1 )
+    var removed = null
+
+    removed = pipeline.splice( 0, 0, transf1 )
+    assert.strictEqual( removed.length, 0 )
     assert.strictEqual( pipeline.length, 4 )
     assert.ok( pipeline.get( 0 ) === transf1, 'incorrect position' )
 
-    pipeline.splice( 2, 0, transf2 )
+    removed = pipeline.splice( 2, 0, transf2 )
+    assert.strictEqual( removed.length, 0 )
     assert.strictEqual( pipeline.length, 5 )
     assert.ok( pipeline.get( 2 ) === transf2, 'incorrect position' )
 
-    pipeline.splice( pipeline.length, 0, transf3 )
+    removed = pipeline.splice( pipeline.length, 0, transf3 )
+    assert.strictEqual( removed.length, 0 )
     assert.strictEqual( pipeline.length, 6 )
     assert.ok( pipeline.get( 5 ) === transf3, 'incorrect position' )
 
@@ -92,16 +97,21 @@ describe( 'Pipeline.splice()', function() {
         done()
       })
 
-    pipeline.splice( -pipeline.length, 0, transf1 )
+    var removed = null
+
+    removed = pipeline.splice( -pipeline.length, 0, transf1 )
+    assert.strictEqual( removed.length, 0 )
     assert.strictEqual( pipeline.length, 4 )
     assert.ok( pipeline.get( 0 ) === transf1, 'incorrect position' )
 
-    pipeline.splice( -2, 0, transf2 )
+    removed = pipeline.splice( -2, 0, transf2 )
+    assert.strictEqual( removed.length, 0 )
     assert.strictEqual( pipeline.length, 5 )
     assert.ok( pipeline.get( 2 ) === transf2, 'incorrect position' )
 
     // Note that -1 inserts *before* the last stream in the pipeline
-    pipeline.splice( -1, 0, transf3 )
+    removed = pipeline.splice( -1, 0, transf3 )
+    assert.strictEqual( removed.length, 0 )
     assert.strictEqual( pipeline.length, 6 )
     assert.ok( pipeline.get( 4 ) === transf3, 'incorrect position' )
 

@@ -6,6 +6,13 @@ var Stream = require( 'stream' )
 
 describe( 'Pipeline.prepend()', function() {
 
+  it( 'returns pipeline length', function() {
+    var pipeline = new Pipeline()
+    var stream = new Stream.PassThrough()
+    assert.strictEqual( pipeline.prepend( stream ), pipeline.length )
+    assert.strictEqual( pipeline.length, 1 )
+  })
+
   it( 'can prepend a stream', function( done ) {
 
     var streams = []
@@ -13,9 +20,9 @@ describe( 'Pipeline.prepend()', function() {
     var chunks = []
 
     pipeline
-      .once( 'error', done )
-      .once( 'data', (data) => chunks.push( data ) )
-      .once( 'finish', function() {
+      .on( 'error', done )
+      .on( 'data', (data) => chunks.push( data ) )
+      .on( 'finish', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })
@@ -39,9 +46,9 @@ describe( 'Pipeline.prepend()', function() {
     var chunks = []
 
     pipeline
-      .once( 'error', done )
-      .once( 'data', (data) => chunks.push( data ) )
-      .once( 'finish', function() {
+      .on( 'error', done )
+      .on( 'data', (data) => chunks.push( data ) )
+      .on( 'finish', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })

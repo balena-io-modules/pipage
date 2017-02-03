@@ -1,97 +1,97 @@
-var Pipeline = require( '..' )
-var assert = require( 'assert' )
-var Stream = require( 'stream' )
+const Pipeline = require('..');
+const assert = require('assert');
+const Stream = require('stream');
 
-describe( 'Pipeline', function() {
+describe('Pipeline', function() {
 
-  it( 'can handle no streams', function( done ) {
+  it('can handle no streams', function(done) {
 
-    var pipeline = new Pipeline()
-    var chunks = []
+    const pipeline = new Pipeline();
+    const chunks = [];
 
     pipeline
-      .once( 'error', done )
-      .once( 'readable', function() {
-        while( data = this.read() ) {
-          chunks.push( data )
+      .once('error', done)
+      .once('readable', function() {
+        while (data = this.read()) {
+          chunks.push(data);
         }
       })
-      .once( 'finish', function() {
-        assert.equal( chunks.join(''), 'DEADBEEF' )
-        done()
-      })
+      .once('finish', function() {
+        assert.equal(chunks.join(''), 'DEADBEEF');
+        done();
+      });
 
-    assert.equal( pipeline.length, 0 )
+    assert.equal(pipeline.length, 0);
 
-    pipeline.write( 'DEAD' )
-    pipeline.write( 'BEEF' )
-    pipeline.end()
+    pipeline.write('DEAD');
+    pipeline.write('BEEF');
+    pipeline.end();
 
-  })
+  });
 
-  it( 'can handle a single stream', function( done ) {
+  it('can handle a single stream', function(done) {
 
-    var streams = [
+    const streams = [
       new Stream.Transform({
-        transform: function( chunk, _, next ) {
-          next( null, chunk.toString().toUpperCase() )
+        transform: function(chunk, _, next) {
+          next(null, chunk.toString().toUpperCase());
+        }
+      })
+    ];
+
+    const pipeline = new Pipeline(streams);
+    const chunks = [];
+
+    pipeline
+      .once('error', done)
+      .once('readable', function() {
+        while (data = this.read()) {
+          chunks.push(data);
+        }
+      })
+      .once('finish', function() {
+        assert.equal(chunks.join(''), 'DEADBEEF');
+        done();
+      });
+
+    pipeline.write('dead');
+    pipeline.write('beef');
+    pipeline.end();
+
+  });
+
+  it('can handle multiple streams', function(done) {
+
+    const streams = [
+      new Stream.PassThrough(),
+      new Stream.PassThrough(),
+      new Stream.Transform({
+        transform: function(chunk, _, next) {
+          next(null, chunk.toString().toUpperCase());
         }
       }),
-    ]
+      new Stream.PassThrough()
+    ];
 
-    var pipeline = new Pipeline( streams )
-    var chunks = []
-
-    pipeline
-      .once( 'error', done )
-      .once( 'readable', function() {
-        while( data = this.read() ) {
-          chunks.push( data )
-        }
-      })
-      .once( 'finish', function() {
-        assert.equal( chunks.join(''), 'DEADBEEF' )
-        done()
-      })
-
-    pipeline.write( 'dead' )
-    pipeline.write( 'beef' )
-    pipeline.end()
-
-  })
-
-  it( 'can handle multiple streams', function( done ) {
-
-    var streams = [
-      new Stream.PassThrough(),
-      new Stream.PassThrough(),
-      new Stream.Transform({
-        transform: function( chunk, _, next ) {
-          next( null, chunk.toString().toUpperCase() )
-        }
-      }),
-      new Stream.PassThrough(),
-    ]
-
-    var pipeline = new Pipeline( streams )
-    var chunks = []
+    const pipeline = new Pipeline(streams);
+    const chunks = [];
 
     pipeline
-      .once( 'error', done )
-      .once( 'readable', function() {
-        while( data = this.read() ) {
-          chunks.push( data )
+      .once('error', done)
+      .once('readable', function() {
+        while (data = this.read()) {
+          chunks.push(data);
         }
       })
-      .once( 'finish', function() {
-        assert.equal( chunks.join(''), 'DEADBEEF' )
-        done()
-      })
+      .once('finish', function() {
+        assert.equal(chunks.join(''), 'DEADBEEF');
+        done();
+      });
 
-    pipeline.write( 'dead' )
-    pipeline.write( 'beef' )
-    pipeline.end()
+    pipeline.write('dead');
+    pipeline.write('beef');
+    pipeline.end();
 
-  })
+  });
 
-})
+});

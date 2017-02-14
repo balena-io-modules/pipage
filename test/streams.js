@@ -10,13 +10,13 @@ describe( 'Pipeline', function() {
     var chunks = []
 
     pipeline
-      .once( 'error', done )
-      .once( 'readable', function() {
+      .on( 'error', done )
+      .on( 'readable', function() {
         while( data = this.read() ) {
           chunks.push( data )
         }
       })
-      .once( 'finish', function() {
+      .on( 'finish', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })
@@ -43,19 +43,19 @@ describe( 'Pipeline', function() {
     var chunks = []
 
     pipeline
-      .once( 'error', done )
-      .once( 'readable', function() {
+      .on( 'error', done )
+      .on( 'readable', function() {
         while( data = this.read() ) {
           chunks.push( data )
         }
       })
-      .once( 'finish', function() {
+      .on( 'finish', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })
 
-    pipeline.write( 'dead' )
-    pipeline.write( 'beef' )
+    pipeline.write( 'Dead' )
+    pipeline.write( 'Beef' )
     pipeline.end()
 
   })
@@ -77,19 +77,19 @@ describe( 'Pipeline', function() {
     var chunks = []
 
     pipeline
-      .once( 'error', done )
-      .once( 'readable', function() {
+      .on( 'error', done )
+      .on( 'readable', function() {
         while( data = this.read() ) {
           chunks.push( data )
         }
       })
-      .once( 'finish', function() {
+      .on( 'finish', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })
 
-    pipeline.write( 'dead' )
-    pipeline.write( 'beef' )
+    pipeline.write( 'Dead' )
+    pipeline.write( 'Beef' )
     pipeline.end()
 
   })

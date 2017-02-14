@@ -6,6 +6,14 @@ var Stream = require( 'stream' )
 
 describe( 'Pipeline.append()', function() {
 
+  it( 'returns pipeline length', function() {
+    var pipeline = new Pipeline()
+    assert.strictEqual( pipeline.append( new Stream.PassThrough() ), pipeline.length )
+    assert.strictEqual( pipeline.length, 1 )
+    assert.strictEqual( pipeline.append( new Stream.PassThrough() ), pipeline.length )
+    assert.strictEqual( pipeline.length, 2 )
+  })
+
   it( 'can append a stream', function( done ) {
 
     var streams = []
@@ -13,9 +21,9 @@ describe( 'Pipeline.append()', function() {
     var chunks = []
 
     pipeline
-      .once( 'error', done )
-      .once( 'data', (data) => chunks.push( data ) )
-      .once( 'finish', function() {
+      .on( 'error', done )
+      .on( 'data', (data) => chunks.push( data ) )
+      .on( 'finish', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })
@@ -39,9 +47,9 @@ describe( 'Pipeline.append()', function() {
     var chunks = []
 
     pipeline
-      .once( 'error', done )
-      .once( 'data', (data) => chunks.push( data ) )
-      .once( 'finish', function() {
+      .on( 'error', done )
+      .on( 'data', (data) => chunks.push( data ) )
+      .on( 'finish', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })

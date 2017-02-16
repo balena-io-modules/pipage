@@ -2,6 +2,9 @@ language: node_js
 sudo: false
 notifications:
   email: false
+os:
+  - linux
+  - osx
 node_js:
   - stable
   - "6"

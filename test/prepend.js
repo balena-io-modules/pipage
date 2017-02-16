@@ -28,9 +28,7 @@ describe( 'Pipeline.prepend()', function() {
       })
 
     assert.equal( pipeline.length, 0 )
-
-    pipeline.prepend( new Stream.PassThrough() )
-
+    assert.equal( pipeline.prepend( new Stream.PassThrough() ), 1 )
     assert.equal( pipeline.length, 1 )
 
     pipeline.write( 'DEAD' )

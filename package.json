@@ -12,7 +12,8 @@
   ],
   "main": "lib/pipeline.js",
   "dependencies": {
-    "bloodline": "^1.0.0"
+    "bloodline": "^1.0.0",
+    "debug": "~2.6.1"
   },
   "devDependencies": {
     "jsdoc-to-markdown": "^2.0.1",

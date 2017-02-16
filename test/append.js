@@ -29,9 +29,7 @@ describe( 'Pipeline.append()', function() {
       })
 
     assert.equal( pipeline.length, 0 )
-
-    pipeline.append( new Stream.PassThrough() )
-
+    assert.equal( pipeline.append( new Stream.PassThrough() ), 1 )
     assert.equal( pipeline.length, 1 )
 
     pipeline.write( 'DEAD' )

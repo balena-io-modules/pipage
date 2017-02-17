@@ -2,7 +2,8 @@
 [![npm](https://img.shields.io/npm/v/pipage.svg?style=flat-square)](https://npmjs.com/package/pipage)
 [![npm license](https://img.shields.io/npm/l/pipage.svg?style=flat-square)](https://npmjs.com/package/pipage)
 [![npm downloads](https://img.shields.io/npm/dm/pipage.svg?style=flat-square)](https://npmjs.com/package/pipage)
-[![build status](https://img.shields.io/travis/resin-io-modules/pipage.svg?style=flat-square)](https://travis-ci.org/resin-io-modules/pipage)
+[![build status](https://img.shields.io/travis/resin-io-modules/pipage/master.svg?style=flat-square&label=mac%20/%20linux)](https://travis-ci.org/resin-io-modules/pipage)
+[![build status](https://img.shields.io/appveyor/ci/resin-io/pipage/master.svg?style=flat-square&label=windows)](https://ci.appveyor.com/project/resin-io/pipage)
 
 **pip•age**
 

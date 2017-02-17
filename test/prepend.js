@@ -1,7 +1,5 @@
 var Pipeline = require( '..' )
 var assert = require( 'assert' )
-var fs = require( 'fs' )
-var path = require( 'path' )
 var Stream = require( 'stream' )
 
 describe( 'Pipeline.prepend()', function() {

@@ -31,6 +31,6 @@
   },
   "scripts": {
     "test": "mocha",
-    "doc": "jsdoc2md 'lib/**/*.js' --separators --param-list-format list > doc/README.md"
+    "doc": "jsdoc2md lib/**/*.js --separators --param-list-format list > doc/README.md"
   }
 }

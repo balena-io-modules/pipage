@@ -8,6 +8,9 @@
 * [Pipeline](#Pipeline) ⇐ <code>Stream.Duplex</code>
     * [new Pipeline([streams], [options])](#new_Pipeline_new)
     * [.end(chunk, encoding, callback)](#Pipeline+end) ⇒ <code>undefined</code>
+    * [.bind(stream, events)](#Pipeline+bind) ⇒ <code>[Pipeline](#Pipeline)</code>
+    * [.unbind(stream, events)](#Pipeline+unbind) ⇒ <code>[Pipeline](#Pipeline)</code>
+    * [.unbindAll(stream)](#Pipeline+unbindAll) ⇒ <code>[Pipeline](#Pipeline)</code>
     * [.get(index)](#Pipeline+get) ⇒ <code>Stream</code>
     * [.indexOf(stream, [fromIndex])](#Pipeline+indexOf) ⇒ <code>Number</code>
     * [.lastIndexOf(stream, [fromIndex])](#Pipeline+lastIndexOf) ⇒ <code>Number</code>
@@ -54,6 +57,50 @@ a 'readable' event once ended
 - chunk <code>\*</code>
 - encoding <code>String</code>
 - callback <code>function</code> - – called on 'finish'
+
+
+-
+
+<a name="Pipeline+bind"></a>
+
+### pipeline.bind(stream, events) ⇒ <code>[Pipeline](#Pipeline)</code>
+Bind to a stream's events, and re-emit them on the pipeline
+
+**Kind**: instance method of <code>[Pipeline](#Pipeline)</code>  
+**Chainable**  
+**Params**
+
+- stream <code>Stream</code>
+- events <code>String</code> | <code>Array</code>
+
+
+-
+
+<a name="Pipeline+unbind"></a>
+
+### pipeline.unbind(stream, events) ⇒ <code>[Pipeline](#Pipeline)</code>
+Unbind the pipeline from a stream's event(s)
+
+**Kind**: instance method of <code>[Pipeline](#Pipeline)</code>  
+**Chainable**  
+**Params**
+
+- stream <code>Stream</code>
+- events <code>String</code> | <code>Array</code>
+
+
+-
+
+<a name="Pipeline+unbindAll"></a>
+
+### pipeline.unbindAll(stream) ⇒ <code>[Pipeline](#Pipeline)</code>
+Unbind the pipeline from all of a stream's bound events
+
+**Kind**: instance method of <code>[Pipeline](#Pipeline)</code>  
+**Chainable**  
+**Params**
+
+- stream <code>Stream</code>
 
 
 -

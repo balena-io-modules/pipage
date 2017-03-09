@@ -13,11 +13,13 @@
   "main": "lib/pipeline.js",
   "dependencies": {
     "bloodline": "^1.0.0",
-    "debug": "~2.6.1"
+    "debug": "^2.6.1"
   },
   "devDependencies": {
     "jsdoc-to-markdown": "^2.0.1",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "publish-please": "^2.2.0",
+    "versionist": "^2.8.1"
   },
   "peerDependencies": {},
   "optionalDependencies": {},
@@ -31,6 +33,10 @@
   },
   "scripts": {
     "test": "mocha",
-    "doc": "jsdoc2md lib/**/*.js --separators --param-list-format list > doc/README.md"
+    "doc": "jsdoc2md lib/**/*.js --separators --param-list-format list > doc/README.md",
+    "publish-please": "publish-please",
+    "prepublish": "publish-please guard",
+    "version": "npm run changelog && git add CHANGELOG.md",
+    "changelog": "versionist"
   }
 }

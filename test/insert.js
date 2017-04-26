@@ -18,9 +18,9 @@ describe( 'Pipeline.insert()', function() {
     assert.equal( pipeline.length, 2 )
 
     pipeline
-      .once( 'error', done )
-      .once( 'data', (data) => chunks.push( data ) )
-      .once( 'finish', function() {
+      .on( 'error', done )
+      .on( 'data', (data) => chunks.push( data ) )
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'deadbeef' )
         done()
       })
@@ -32,7 +32,8 @@ describe( 'Pipeline.insert()', function() {
 
     insert = new Stream.Transform({
       transform: function( chunk, _, next ) {
-        next( null, chunk.toString().toLowerCase() )
+        this.push( chunk.toString().toLowerCase() )
+        next()
       }
     })
 

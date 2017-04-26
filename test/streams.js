@@ -12,11 +12,12 @@ describe( 'Pipeline', function() {
     pipeline
       .on( 'error', done )
       .on( 'readable', function() {
+        var data = null
         while( data = this.read() ) {
           chunks.push( data )
         }
       })
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })
@@ -34,9 +35,10 @@ describe( 'Pipeline', function() {
     var streams = [
       new Stream.Transform({
         transform: function( chunk, _, next ) {
-          next( null, chunk.toString().toUpperCase() )
+          this.push( chunk.toString().toUpperCase() )
+          next()
         }
-      }),
+      })
     ]
 
     var pipeline = new Pipeline( streams )
@@ -45,11 +47,12 @@ describe( 'Pipeline', function() {
     pipeline
       .on( 'error', done )
       .on( 'readable', function() {
+        var data = null
         while( data = this.read() ) {
           chunks.push( data )
         }
       })
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })
@@ -79,11 +82,12 @@ describe( 'Pipeline', function() {
     pipeline
       .on( 'error', done )
       .on( 'readable', function() {
+        var data = null
         while( data = this.read() ) {
           chunks.push( data )
         }
       })
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })

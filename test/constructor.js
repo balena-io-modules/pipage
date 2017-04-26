@@ -4,11 +4,6 @@ var Stream = require( 'stream' )
 
 describe( 'Constructor', function() {
 
-  it( 'can be called without "new" keyword', function() {
-    var pipeline = Pipeline()
-    assert.ok( pipeline instanceof Pipeline, 'instanceof Pipeline' )
-  })
-
   it( 'can be called without arguments', function() {
     var pipeline = new Pipeline()
     assert.ok( pipeline instanceof Pipeline, 'instanceof Pipeline' )

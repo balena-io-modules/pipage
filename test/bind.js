@@ -20,7 +20,7 @@ describe( 'Pipeline.bind()', function() {
         assert.equal( two, 2 )
         assert.equal( three, 3 )
       })
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         assert.ok( hadEvent, 'missing custom event' )
         done()
@@ -29,13 +29,13 @@ describe( 'Pipeline.bind()', function() {
     pipeline.bind( emitter, 'custom:event' )
     pipeline.write( 'DEAD' )
 
-    setTimeout( function() {
+    process.nextTick( function() {
       emitter.emit( 'custom:event', 1, 2, 3 )
-      setImmediate( function() {
+      process.nextTick( function() {
         pipeline.write( 'BEEF' )
         pipeline.end()
       })
-    }, 16 )
+    })
 
   })
 

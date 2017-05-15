@@ -34,7 +34,7 @@ describe( 'Pipeline.splice()', function() {
     pipeline
       .on( 'error', done )
       .on( 'data', function( chunk ) { chunks.push( chunk ) })
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'd-adb--f' )
         done()
       })
@@ -92,7 +92,7 @@ describe( 'Pipeline.splice()', function() {
     pipeline
       .on( 'error', done )
       .on( 'data', function( chunk ) { chunks.push( chunk ) })
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'd-adb--f' )
         done()
       })

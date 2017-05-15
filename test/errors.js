@@ -9,13 +9,15 @@ describe( 'Pipeline#onError', function() {
     var stream1 = new Stream.PassThrough()
     var stream2 = new Stream.Transform({
       transform: function( chunk, _, next ) {
-        next( null, chunk.toString().toLowerCase() )
+        this.push( chunk.toString().toLowerCase() )
+        next()
       }
     })
 
     var stream3 = new Stream.Transform({
       transform: function( chunk, _, next ) {
-        next( null, chunk.toString().toUpperCase() )
+        this.push( chunk.toString().toUpperCase() )
+        next()
       }
     })
 
@@ -28,15 +30,15 @@ describe( 'Pipeline#onError', function() {
       hadError = true
     })
 
-    pipeline.resume().once( 'finish', function() {
+    pipeline.resume().once( 'end', function() {
       done()
     })
 
     pipeline.write( 'something' )
-    pipeline.end( 'else' )
 
-    setImmediate( function() {
+    process.nextTick( function() {
       stream1.emit( 'error', new Error( 'Catch me' ) )
+      pipeline.end( 'else' )
     })
 
   })
@@ -65,14 +67,14 @@ describe( 'Pipeline#onError', function() {
       if( hadErrors === 3 ) done()
     })
 
-    pipeline.resume().once( 'finish', function() {
+    pipeline.resume().on( 'end', function() {
       done( new Error( 'Did not error' ) )
     })
 
-    setImmediate( function() {
+    process.nextTick( function() {
       pipeline.write( 'something' )
       stream1.emit( 'error', new Error( 'Catch me' ) )
-      setImmediate( function() {
+      process.nextTick( function() {
         stream2.emit( 'error', new Error( 'Catch me' ) )
         pipeline.end( 'else' )
         stream3.emit( 'error', new Error( 'Catch me' ) )
@@ -105,7 +107,7 @@ describe( 'Pipeline#onError', function() {
       hadError = true
     })
 
-    pipeline.resume().once( 'finish', function() {
+    pipeline.resume().once( 'end', function() {
       done()
     })
 
@@ -142,7 +144,7 @@ describe( 'Pipeline#onError', function() {
       hadError = true
     })
 
-    pipeline.resume().once( 'finish', function() {
+    pipeline.resume().once( 'end', function() {
       done()
     })
 

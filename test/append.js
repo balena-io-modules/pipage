@@ -21,7 +21,7 @@ describe( 'Pipeline.append()', function() {
     pipeline
       .on( 'error', done )
       .on( 'data', (data) => chunks.push( data ) )
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })
@@ -45,7 +45,7 @@ describe( 'Pipeline.append()', function() {
     pipeline
       .on( 'error', done )
       .on( 'data', (data) => chunks.push( data ) )
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         done()
       })

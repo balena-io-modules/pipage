@@ -14,10 +14,12 @@ describe( 'Edge cases', function() {
 
     pipeline
       .on( 'error', done )
-      .on( 'finish', done )
+      .on( 'end', done )
       .on( 'readable', function() {
         var hash = this.read()
-        assert.equal( hash.toString( 'hex' ), '37a309ae59ad3a562a083eb90e32fa6757bdd41f' )
+        if( hash != null ) {
+          assert.equal( hash.toString( 'hex' ), '37a309ae59ad3a562a083eb90e32fa6757bdd41f' )
+        }
       })
 
     pipeline.end( 'Let it work!' )

@@ -14,7 +14,7 @@ describe( 'Pipeline.unbind()', function() {
       .on( 'error', done )
       .on( 'data', (data) => chunks.push( data ) )
       .on( 'custom:event', () => { throw new Error( 'Emitted unbound event' ) })
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         assert.equal( emitter.listenerCount( 'custom:event' ), 0 )
         done()
@@ -50,7 +50,7 @@ describe( 'Pipeline.unbindAll()', function() {
       .on( 'custom:event1', () => { throw new Error( 'Emitted unbound event' ) })
       .on( 'custom:event2', () => { throw new Error( 'Emitted unbound event' ) })
       .on( 'custom:event3', () => { throw new Error( 'Emitted unbound event' ) })
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         assert.equal( emitter._pipageListeners, null )
         assert.equal( emitter.listenerCount( 'custom:event1' ), 0 )
@@ -65,17 +65,17 @@ describe( 'Pipeline.unbindAll()', function() {
 
     pipeline.write( 'DEAD' )
 
-    setTimeout( function() {
+    process.nextTick( function() {
       pipeline.unbindAll( emitter )
       emitter.emit( 'custom:event1' )
-      setImmediate( function() {
+      process.nextTick( function() {
         emitter.emit( 'custom:event2' )
         pipeline.write( 'BEEF', function() {
           emitter.emit( 'custom:event3' )
         })
         pipeline.end()
       })
-    }, 16 )
+    })
 
   })
 
@@ -89,7 +89,7 @@ describe( 'Pipeline.unbindAll()', function() {
       .on( 'error', done )
       .on( 'data', (data) => chunks.push( data ) )
       .on( 'custom:event', () => { throw new Error( 'Emitted unbound event' ) })
-      .on( 'finish', function() {
+      .on( 'end', function() {
         assert.equal( chunks.join(''), 'DEADBEEF' )
         assert.equal( emitter._pipageListeners, null )
         assert.equal( emitter.listenerCount( 'custom:event' ), 0 )

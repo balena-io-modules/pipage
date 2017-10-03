@@ -1,11 +1,3 @@
-<h1 align="center">The Pipage</h1>
-<p align="center">
-  <a href="https://npmjs.com/package/pipage"><img alt="npm" src="https://img.shields.io/npm/v/pipage.svg?style=flat-square"></a>
-  <a href="https://npmjs.com/package/pipage"><img alt="npm license" src="https://img.shields.io/npm/l/pipage.svg?style=flat-square"></a>
-  <a href="https://npmjs.com/package/pipage"><img alt="npm downloads" src="https://img.shields.io/npm/dm/pipage.svg?style=flat-square"></a>
-  <a href="https://travis-ci.org/resin-io-modules/pipage"><img alt="build status" src="https://img.shields.io/travis/resin-io-modules/pipage/master.svg?style=flat-square&label=mac%20%2F%20linux"></a>
-  <a href="https://ci.appveyor.com/project/resin-io/pipage"><img alt="build status" src="https://img.shields.io/appveyor/ci/resin-io/pipage/master.svg?style=flat-square&label=windows"></a>
-</p>
 
 **pip•age**
 

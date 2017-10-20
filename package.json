@@ -1,6 +1,6 @@
 {
   "name": "pipage",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Splice-able stream pipeline between source & destination",
   "license": "MIT",
   "author": "Jonas Hermsmeier <jhermsmeier@gmail.com> (https://jhermsmeier.de)",
@@ -12,11 +12,11 @@
   ],
   "main": "lib/pipeline.js",
   "dependencies": {
-    "debug": "~2.6.1"
+    "debug": "^3.1.0"
   },
   "devDependencies": {
-    "jsdoc-to-markdown": "^2.0.1",
-    "mocha": "^3.2.0"
+    "jsdoc-to-markdown": "^3.0.0",
+    "mocha": "^4.0.1"
   },
   "peerDependencies": {},
   "optionalDependencies": {},
